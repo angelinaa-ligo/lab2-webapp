@@ -6,12 +6,12 @@ pipeline {
         DOCKER_CREDS = "dockerhub-creds"
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/angelinaa-ligo/lab2-webapp.git'
-            }
-        }
+    stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/angelinaa-ligo/lab2-webapp.git'
+    }
+}
 
         stage('Build Maven Project') {
             steps {
