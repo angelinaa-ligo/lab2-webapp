@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "angelina/lab2-webapp"
+        DOCKER_IMAGE = "angelina2005/lab2-webapp"
         DOCKER_CREDS = "dockerhub-creds"
     }
 
