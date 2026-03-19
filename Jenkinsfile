@@ -6,7 +6,7 @@ pipeline {
         DOCKER_CREDS = "dockerhub-creds"
     }
 
-    stages { // <--- todos os stages devem estar aqui
+    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Maven Project') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
@@ -27,21 +27,21 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
                 }
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                bat 'docker build -t %DOCKER_IMAGE% .'
             }
         }
 
         stage('Docker Push') {
             steps {
-                sh 'docker push $DOCKER_IMAGE'
+                bat 'docker push %DOCKER_IMAGE%'
             }
         }
-    } 
-} 
+    }
+}
