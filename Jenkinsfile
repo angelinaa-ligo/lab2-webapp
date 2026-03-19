@@ -6,12 +6,13 @@ pipeline {
         DOCKER_CREDS = "dockerhub-creds"
     }
 
-    stage('Checkout') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/angelinaa-ligo/lab2-webapp.git'
-    }
-}
+    stages { // <--- todos os stages devem estar aqui
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/angelinaa-ligo/lab2-webapp.git'
+            }
+        }
 
         stage('Build Maven Project') {
             steps {
@@ -42,5 +43,5 @@ pipeline {
                 sh 'docker push $DOCKER_IMAGE'
             }
         }
-    }
-}
+    } 
+} 
